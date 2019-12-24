@@ -1,3 +1,4 @@
+// 這裡是一開始裝好以後會出現的main.dart檔案
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

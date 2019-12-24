@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './pages/product.dart';
 
 class Products extends StatelessWidget {
   final List<String> products;
@@ -8,16 +9,35 @@ class Products extends StatelessWidget {
   Products(this.products);
   // 從父層去接_products
   Widget _buildProductItem(BuildContext context, int index) {
-    // 一張卡片組件(一個商品) // 除了傳入app基本資訊  //  還要傳入目前跑到第幾圈
+  //上一篇有提到，若陣列長度大於零，才會跑這個function渲染出卡片
     return Card(
       child: Column(
         children: <Widget>[
           Image.asset('assets/food.jpg'),
-          Text(products[index])
-          // 因為這邊是放在Widget裡面，最外層釋放Card這個flutter預設的component
-          // 該陣列的哪一圈的值
+          Text(products[index]),
+          ButtonBar( //增加一個buttonBar
+            alignment: MainAxisAlignment.center, 
+            //主軸對齊：垂直置中 
+            children: <Widget>[
+              FlatButton(
+              //扁平化按鈕
+                child: Text('Details'),
+                //按鈕文字
+                onPressed: () => Navigator.push(
+                //按下去以後，把新的一頁蓋到目前頁面上
+                  context,
+                  //舊的資訊先傳進來
+                  MaterialPageRoute(
+                  //傳一個route組件進來
+                    builder: (BuildContext context) => ProductPage(),
+                    //建好後，切到剛剛引入的productPage()
+                  ),
+                ),
+              )
+            ],
+          )
         ],
-      )
+      ),
     );
   }
   Widget _buildProductList() {
